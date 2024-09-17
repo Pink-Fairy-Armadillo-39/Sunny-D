@@ -5,7 +5,7 @@ const path = require('path');
 
 
 // Data Base
-mongoose.connect('mongodb://localhost/SunnyD', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://sunnyDTeam:test1234@sunnyd.gewq7u7.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });
@@ -35,6 +35,10 @@ api.get('/submit/:username', userController.getUser, (req, res)=>{
 api.post('/submit', userController.updateUser, (req, res) => {
   return res.status(200).json(res.locals.totalPoints);
 });
+
+api.post('/create', userController.createUser, (req, res) => {
+  return res.status(200).json(res.locals.newUser);
+})
 
 // Unknown route handler
 app.use((req, res) => res.sendStatus(404));

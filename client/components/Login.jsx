@@ -1,41 +1,56 @@
-import React from 'react';
-import { Link } from "react-router-dom"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 
-function Login(){
-    return (
-        <div>
 
-            <form>
-                <label htmlFor="username">Your name:</label>
-                <input name="username"></input>
-                <label htmlFor="zipcode">Your zip code:</label>
-                <input name="zipcode"></input>
-            </form>
-            <button><Link to="/home">GET SUNNY</Link></button>
-        </div>
-        
+function Login() {
+  const [zipcode, setZipcode] = useState(0);
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  
 
-    )
 
+  // const handleChange = () => {
+  //   setZipcode(document.getElementById("zipcodeInput").value);
+  //   setName(document.getElementById("nameInput").value.toUpperCase());
+
+  // };
+
+
+  return (
+    <div id="loginElements">
+      <form className="flex">
+        <input
+          id="nameInput"
+          name="username"
+          placeholder="Name"
+          onChange={(e) => setName(e.target.value)}
+        ></input>
+        <input
+          type='password'
+          id="passwordInput"
+          name="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        ></input>
+        <input
+          id="zipcodeInput"
+          name="zipcode"
+          placeholder="Zip Code"
+          onChange={(e) => setZipcode(e.target.value)}
+        ></input>
+      </form>
+
+      <button id="loginButton">
+        <Link
+          to="/home"
+          state={{ zipcodeEntry: zipcode, nameEntry: name }}
+        >
+          <div className="sunnyD-img"></div>
+        </Link>
+      </button>
+    </div>
+  );
 }
 
-export default Login
-
-// function Form() {
-//   const handleSubmit = (event) => {
-//     event.preventDefault(); // prevent default form submission
-//     window.location.href = 'http://localhost:8080/center'; // redirect to desired URL
-//   }
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit}>
-//        <label htmlFor="username">Your name:</label>
-{/* <input name="username"></input>
-<label htmlFor="zipcode">Your zip code:</label>
-<input name="zipcode"></input>
-</form>
-<button><Link to="/home">GET SUNNY</Link></button>
-</div> */}
-//   );
-// }
+export default Login;
